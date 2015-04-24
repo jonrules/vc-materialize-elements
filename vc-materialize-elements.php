@@ -76,7 +76,16 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 					'param_name' => 'content', 
 					'value' => __( '<p>I am test text block. Click edit button to change this text.</p>', 'vc-materialize-elements' ),
 					'description' => __( 'Enter your content, Baby.', 'vc-materialize-elements' )
-				)
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Video URL', 'vc-materialize-elements' ),
+                                        'param_name' => 'video_url',
+                                        'value' => '',
+                                        'description' => __( 'A video to embed into the card.', 'vc-materialize-elements' )
+                                )	
 			)
 		) );
 	}
@@ -102,7 +111,8 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 	function vc_materialize_elements_shortcode_card( $atts, $content ) {
 		$args = shortcode_atts( array(
 			'title' => '',
-			'text_color' => '#000000'
+			'text_color' => '#000000',
+			'video_url' => ''
 		), $atts );
 		$args['content'] = $content;
 		return vc_materialize_elements_get_template_contents( 'card', $args );
