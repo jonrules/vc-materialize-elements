@@ -1,5 +1,12 @@
 <div class="card blue-grey darken-1">
-	<?php if ( $video_url ): ?>
+	<?php if ( $image_url ) : ?>
+		<div class="card-image waves-effect waves-block waves-light">
+			<img src="<?php echo esc_html( $image_url ); ?>" />
+			<?php if ( $image_title ): ?>
+				<span class="card-title"><?php echo esc_html( $image_title ); ?></span>
+			<?php endif; ?>
+		</div>
+	<?php elseif ( $video_url ): ?>
 		<?php $video_url_parts = parse_url( $video_url ); ?>
 		<?php $video_url_query_params = array(); ?>
 		<?php parse_str( $video_url_parts['query'], $video_url_query_params ); ?>

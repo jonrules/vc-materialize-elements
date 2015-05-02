@@ -81,6 +81,24 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                                         'type' => 'textfield',
                                         'holder' => 'div',
                                         'class' => '',
+                                        'heading' => __( 'Image URL', 'vc-materialize-elements' ),
+                                        'param_name' => 'image_url',
+                                        'value' => '',
+                                        'description' => __( 'An image for the card.', 'vc-materialize-elements' )
+                                ),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Image Title', 'vc-materialize-elements' ),
+                                        'param_name' => 'image_title',
+                                        'value' => '',
+                                        'description' => __( 'The title of the image.', 'vc-materialize-elements' )
+                                ),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
                                         'heading' => __( 'Video URL', 'vc-materialize-elements' ),
                                         'param_name' => 'video_url',
                                         'value' => '',
@@ -112,6 +130,8 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 		$args = shortcode_atts( array(
 			'title' => '',
 			'text_color' => '#000000',
+			'image_url' => '',
+			'image_title' => '',
 			'video_url' => ''
 		), $atts );
 		$args['content'] = $content;
