@@ -40,6 +40,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 	 * Load plugin
 	 */
 	function vc_materialize_elements_map() {
+		// Card
 		vc_map( array(
 			'name' => __( 'Card', 'vc-materialize-elements' ),
 			'base' => 'vc_materialize_card',
@@ -52,6 +53,26 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 			'show_settings_on_create' => true,
 			'params' => array(
 				array(
+					'type' => 'dropdown',
+					'heading' => __( 'Size', 'vc-materialize-elements' ),
+					'param_name' => 'size',
+					'value' => array(
+						__( 'Small', 'vc-materialize-elements' ) => 'small',
+						__( 'Medium', 'vc-materialize-elements' ) => 'medium',
+						__( 'Large', 'vc-materialize-elements' ) => 'large'
+					),
+					'description' => __( 'Select card size.', 'vc-materialize-elements' )
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'class',
+                                        'value' => '',
+                                        'description' => __( 'Enter additional CSS classes.', 'vc-materialize-elements' )
+                                ),
+				array(
 					'type' => 'textfield',
 					'holder' => 'div',
 					'class' => '',
@@ -63,10 +84,10 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 				array(
 					'type' => 'colorpicker',
 					'class' => '',
-					'heading' => __( 'Text color', 'vc-materialize-elements' ),
-					'param_name' => 'text_color',
-					'value' => '#000000',
-					'description' => __( 'Choose text color', 'vc-materialize-elements' )
+					'heading' => __( 'Title Color', 'vc-materialize-elements' ),
+					'param_name' => 'title_color',
+					'value' => '',
+					'description' => __( 'Color of the title text', 'vc-materialize-elements' )
 				),
 				array(
 					'type' => 'textarea_html',
@@ -81,11 +102,43 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                                         'type' => 'textfield',
                                         'holder' => 'div',
                                         'class' => '',
-                                        'heading' => __( 'Image URL', 'vc-materialize-elements' ),
-                                        'param_name' => 'image_url',
+                                        'heading' => __( 'Content Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'content_class',
                                         'value' => '',
-                                        'description' => __( 'An image for the card.', 'vc-materialize-elements' )
+                                        'description' => __( 'Enter additional content CSS classes.', 'vc-materialize-elements' )
                                 ),
+				array(
+					'type' => 'colorpicker',
+					'class' => '',
+					'heading' => __( 'Content Color', 'vc-materialize-elements' ),
+					'param_name' => 'content_color',
+					'value' => '',
+					'description' => __( 'Color of the content text', 'vc-materialize-elements' )
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Reveal Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'reveal_class',
+                                        'value' => '',
+                                        'description' => __( 'Enter additional reveal CSS classes.', 'vc-materialize-elements' )
+                                ),
+				array(
+					'type' => 'colorpicker',
+					'class' => '',
+					'heading' => __( 'Reveal Color', 'vc-materialize-elements' ),
+					'param_name' => 'reveal_color',
+					'value' => '',
+					'description' => __( 'Color of the reveal text', 'vc-materialize-elements' )
+				),
+				array(
+					'type' => 'attach_image',
+					'heading' => __( 'Image', 'js_composer' ),
+					'param_name' => 'image',
+					'value' => '',
+					'description' => __( 'Add an image to the card.', 'vc-materialize-elements' )
+				),
 				array(
                                         'type' => 'textfield',
                                         'holder' => 'div',
@@ -99,10 +152,117 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                                         'type' => 'textfield',
                                         'holder' => 'div',
                                         'class' => '',
+                                        'heading' => __( 'Image Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'image_class',
+                                        'value' => '',
+                                        'description' => __( 'Enter additional image CSS classes.', 'vc-materialize-elements' )
+                                ),
+				array(
+					'type' => 'colorpicker',
+					'class' => '',
+					'heading' => __( 'Image Title Color', 'vc-materialize-elements' ),
+					'param_name' => 'image_title_color',
+					'value' => '',
+					'description' => __( 'Color of the image title text', 'vc-materialize-elements' )
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
                                         'heading' => __( 'Video URL', 'vc-materialize-elements' ),
                                         'param_name' => 'video_url',
                                         'value' => '',
                                         'description' => __( 'A video to embed into the card.', 'vc-materialize-elements' )
+                                )	
+			)
+		) );
+
+		// Button
+		vc_map( array(
+			'name' => __( 'Button', 'vc-materialize-elements' ),
+			'base' => 'vc_materialize_button',
+			'class' => '',
+			'category' => __( 'Content', 'vc-materialize-elements'),
+// 			'icon' => 'icon-wpb-row',
+// 			'weight' => 1000,
+			'show_settings_on_create' => true,
+			'params' => array(
+				array(
+					'type' => 'dropdown',
+					'heading' => __( 'Type', 'vc-materialize-elements' ),
+					'param_name' => 'type',
+					'value' => array(
+						__( 'Raised', 'vc-materialize-elements' ) => '',
+						__( 'Floating', 'vc-materialize-elements' ) => 'floating',
+						__( 'Flat', 'vc-materialize-elements' ) => 'flat',
+						__( 'Large', 'vc-materialize-elements' ) => 'large'
+					),
+					'description' => __( 'Select button type.', 'vc-materialize-elements' )
+				),
+				array(
+					'type' => 'textarea_html',
+					'holder' => 'div',
+					'class' => '',
+					'heading' => __( 'Content', 'vc-materialize-elements' ),
+					'param_name' => 'content', 
+					'value' => __( '<i class="mdi-file-cloud left"></i>button', 'vc-materialize-elements' ),
+					'description' => __( 'Enter your content, Baby.', 'vc-materialize-elements' )
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'URL', 'vc-materialize-elements' ),
+                                        'param_name' => 'url',
+                                        'value' => '',
+                                        'description' => __( 'Enter a link URL.', 'vc-materialize-elements' )
+                                ),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'class',
+                                        'value' => '',
+                                        'description' => __( 'Enter additional CSS classes.', 'vc-materialize-elements' )
+                                )	
+			)
+		) );
+
+		// Header
+		vc_map( array(
+			'name' => __( 'Header', 'vc-materialize-elements' ),
+			'base' => 'vc_materialize_header',
+			'class' => '',
+			'category' => __( 'Content', 'vc-materialize-elements'),
+// 			'icon' => 'icon-wpb-row',
+// 			'weight' => 1000,
+			'show_settings_on_create' => true,
+			'params' => array(
+				array(
+					'type' => 'attach_image',
+					'heading' => __( 'Image', 'js_composer' ),
+					'param_name' => 'image',
+					'value' => '',
+					'description' => __( 'Add an image to the card.', 'vc-materialize-elements' )
+				),
+				array(
+					'type' => 'textarea_html',
+					'holder' => 'div',
+					'class' => '',
+					'heading' => __( 'Content', 'vc-materialize-elements' ),
+					'param_name' => 'content', 
+					'value' => __( '<h1>Header Content</h1>', 'vc-materialize-elements' ),
+					'description' => __( 'Enter your content, Baby.', 'vc-materialize-elements' )
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'class',
+                                        'value' => '',
+                                        'description' => __( 'Enter additional CSS classes.', 'vc-materialize-elements' )
                                 )	
 			)
 		) );
@@ -128,14 +288,44 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 	
 	function vc_materialize_elements_shortcode_card( $atts, $content ) {
 		$args = shortcode_atts( array(
+			'size' => '',
+			'class' => '',
 			'title' => '',
-			'text_color' => '#000000',
-			'image_url' => '',
+			'title_class' => '',
+			'title_color' => '',
+			'content_class' => '',
+			'content_color' => '',
+			'reveal_class' => '',
+			'reveal_color' => '',
+			'image' => '',
+			'image_class' => '',
 			'image_title' => '',
+			'image_title_color' => '',
 			'video_url' => ''
 		), $atts );
 		$args['content'] = $content;
 		return vc_materialize_elements_get_template_contents( 'card', $args );
 	}
 	add_shortcode( 'vc_materialize_card', 'vc_materialize_elements_shortcode_card' );
+
+	function vc_materialize_elements_shortcode_button( $atts, $content ) {
+		$args = shortcode_atts( array(
+			'type' => '',
+			'url' => '',
+			'class' => '',
+		), $atts );
+		$args['content'] = $content;
+		return vc_materialize_elements_get_template_contents( 'button', $args );
+	}
+	add_shortcode( 'vc_materialize_button', 'vc_materialize_elements_shortcode_button' );
+
+	function vc_materialize_elements_shortcode_header( $atts, $content ) {
+		$args = shortcode_atts( array(
+			'image' => '',
+			'class' => '',
+		), $atts );
+		$args['content'] = $content;
+		return vc_materialize_elements_get_template_contents( 'header', $args );
+	}
+	add_shortcode( 'vc_materialize_header', 'vc_materialize_elements_shortcode_header' );
 }

@@ -1,9 +1,9 @@
-<div class="card blue-grey darken-1">
-	<?php if ( $image_url ) : ?>
-		<div class="card-image waves-effect waves-block waves-light">
-			<img src="<?php echo esc_html( $image_url ); ?>" />
+<div class="card <?php echo esc_html( $size ); ?> <?php echo esc_html( $class ); ?>">
+	<?php if ( $image ) : ?>
+		<div class="card-image waves-effect waves-block waves-light <?php echo esc_html( $image_class ); ?>">
+			<img src="<?php echo wp_get_attachment_url( $image ); ?>" />
 			<?php if ( $image_title ): ?>
-				<span class="card-title"><?php echo esc_html( $image_title ); ?></span>
+				<span class="card-title" style="<?php if ( $image_title_color ) echo 'color:' . $image_title_color; ?>"><?php echo esc_html( $image_title ); ?></span>
 			<?php endif; ?>
 		</div>
 	<?php elseif ( $video_url ): ?>
@@ -20,16 +20,11 @@
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
-	<div class="card-content white-text">
-		<span class="card-title activator"><?php echo esc_html( $title ); ?></span>
-		<?php echo wpautop( $content ); ?>
+	<div class="card-content <?php echo esc_html( $content_class ); ?>" style="<?php if ( $content_color ) echo 'color:' . $content_color; ?>">
+		<span class="card-title activator">Show more</span>
 	</div>
-	<div class="card-reveal">
-          <span class="card-title"><?php echo esc_html( $title ); ?> <i class="mdi-navigation-close right"></i></span>
+	<div class="card-reveal <?php echo esc_html( $reveal_class ); ?>" style="<?php if ( $reveal_color ) echo 'color:' . $reveal_color; ?>">
+		<span class="card-title" style="<?php if ( $title_color ) echo 'color:' . $title_color; ?>"><?php echo esc_html( $title ); ?> <i class="mdi-navigation-close right"></i></span>
 		<?php echo wpautop( $content ); ?>
         </div>
-	<div class="card-action">
-		<a href="#">This is a link</a>
-		<a href='#'>This is a link</a>
-	</div>
 </div>
