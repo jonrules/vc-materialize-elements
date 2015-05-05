@@ -284,6 +284,60 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                                 )	
 			)
 		) );
+
+		// Image
+		vc_map( array(
+			'name' => __( 'Image', 'vc-materialize-elements' ),
+			'base' => 'vc_materialize_image',
+			'class' => '',
+			'category' => __( 'Content', 'vc-materialize-elements'),
+// 			'icon' => 'icon-wpb-row',
+// 			'weight' => 1000,
+			'show_settings_on_create' => true,
+			'params' => array(
+				array(
+					'type' => 'attach_image',
+					'heading' => __( 'Image', 'js_composer' ),
+					'param_name' => 'image',
+					'value' => '',
+					'description' => __( 'Add an image.', 'vc-materialize-elements' )
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Width', 'vc-materialize-elements' ),
+                                        'param_name' => 'width',
+                                        'value' => '',
+                                        'description' => __( 'Enter the width of the image.', 'vc-materialize-elements' )
+                                ),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Caption', 'vc-materialize-elements' ),
+                                        'param_name' => 'caption',
+                                        'value' => '',
+                                        'description' => __( 'Enter a caption for the image.', 'vc-materialize-elements' )
+                                ),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'class',
+                                        'value' => '',
+                                        'description' => __( 'Enter additional CSS classes.', 'vc-materialize-elements' )
+                                ),	
+				array(
+                                        'type' => 'checkbox',
+                                        'heading' => __( 'Circular', 'vc-materialize-elements' ),
+                                        'param_name' => 'circular',
+                                        'description' => __( 'Make this a circular image.', 'vc-materialize-elements' ),
+                                        'value' => array( __( 'Yes, please', 'vc-materialze-elements' ) => 'yes' )
+                                )
+			)
+		) );
 	}
 	add_action( 'vc_before_init', 'vc_materialize_elements_map' );
 	
@@ -348,4 +402,17 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 		return vc_materialize_elements_get_template_contents( 'header', $args );
 	}
 	add_shortcode( 'vc_materialize_header', 'vc_materialize_elements_shortcode_header' );
+
+	function vc_materialize_elements_shortcode_image( $atts, $content ) {
+                $args = shortcode_atts( array(
+                        'image' => '',
+			'width' => '',
+			'caption' => '',
+                        'class' => '',
+			'circular' => ''
+                ), $atts );
+                $args['content'] = $content;
+                return vc_materialize_elements_get_template_contents( 'image', $args );
+        }
+        add_shortcode( 'vc_materialize_image', 'vc_materialize_elements_shortcode_image' );
 }

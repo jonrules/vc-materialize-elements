@@ -1,0 +1,1 @@
+<img class="materialboxed <?php if ( $circular ) echo 'circle'; ?> <?php echo esc_html( $class ); ?>" src="<?php echo wp_get_attachment_url( $image ); ?>" <?php if ( $width ) echo 'width="' . esc_html( $width ) . '"'; ?> <?php if ( $caption ) echo 'data-caption="' . esc_html( $caption ) . '"'; ?> />
