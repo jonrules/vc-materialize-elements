@@ -57,6 +57,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 					'heading' => __( 'Size', 'vc-materialize-elements' ),
 					'param_name' => 'size',
 					'value' => array(
+						__( 'Default', 'vc-materialize-elements' ) => '',
 						__( 'Small', 'vc-materialize-elements' ) => 'small',
 						__( 'Medium', 'vc-materialize-elements' ) => 'medium',
 						__( 'Large', 'vc-materialize-elements' ) => 'large'
@@ -115,6 +116,15 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 					'value' => '',
 					'description' => __( 'Color of the content text', 'vc-materialize-elements' )
 				),
+				 array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Excerpt', 'vc-materialize-elements' ),
+                                        'param_name' => 'excerpt',
+                                        'value' => '',
+                                        'description' => __( 'Enter the content excerpt.', 'vc-materialize-elements' )
+                                ),
 				array(
                                         'type' => 'textfield',
                                         'holder' => 'div',
@@ -148,6 +158,13 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                                         'value' => '',
                                         'description' => __( 'The title of the image.', 'vc-materialize-elements' )
                                 ),
+				array(
+					'type' => 'checkbox',
+					'heading' => __( 'Image title text shadow', 'vc-materialize-elements' ),
+					'param_name' => 'image_title_text_shadow',
+					'description' => __( 'Add text shadow to the image title.', 'vc-materialize-elements' ),
+					'value' => array( __( 'Yes, please', 'vc-materialze-elements' ) => 'yes' )
+				),
 				array(
                                         'type' => 'textfield',
                                         'holder' => 'div',
@@ -233,6 +250,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 		vc_map( array(
 			'name' => __( 'Header', 'vc-materialize-elements' ),
 			'base' => 'vc_materialize_header',
+			'is_container' => false,
 			'class' => '',
 			'category' => __( 'Content', 'vc-materialize-elements'),
 // 			'icon' => 'icon-wpb-row',
@@ -295,11 +313,13 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 			'title_color' => '',
 			'content_class' => '',
 			'content_color' => '',
+			'excerpt' => '',
 			'reveal_class' => '',
 			'reveal_color' => '',
 			'image' => '',
 			'image_class' => '',
 			'image_title' => '',
+			'image_title_text_shadow' => '',
 			'image_title_color' => '',
 			'video_url' => ''
 		), $atts );
