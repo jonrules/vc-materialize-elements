@@ -37,6 +37,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 	register_uninstall_hook( __FILE__, 'vc_materialize_elements_uninstall' );
 
 	function vc_materialize_elements_scripts() {
+		wp_enqueue_style( 'unslider', plugins_url( '/css/unslider.css', __FILE__  ) );
 		wp_enqueue_script( 'unslider', plugins_url( '/js/unslider.min.js', __FILE__  ), array( 'jquery' ) );
 		wp_enqueue_script( 'unslider-init', plugins_url( '/js/unslider-init.js', __FILE__  ), array( 'unslider' ) );
 	}
