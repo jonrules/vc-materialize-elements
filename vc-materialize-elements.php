@@ -35,6 +35,12 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 		
 	}
 	register_uninstall_hook( __FILE__, 'vc_materialize_elements_uninstall' );
+
+	function vc_materialize_elements_scripts() {
+		wp_enqueue_script( 'unslider', plugins_url( '/js/unslider.min.js', __FILE__  ), array( 'jquery' ) );
+		wp_enqueue_script( 'unslider-init', plugins_url( '/js/unslider-init.js', __FILE__  ), array( 'unslider' ) );
+	}
+	add_action( 'wp_enqueue_scripts', 'vc_materialize_elements_scripts' );
 	
 	/**
 	 * Load plugin
@@ -338,6 +344,51 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                                 )
 			)
 		) );
+
+		// Posts Slider
+		vc_map( array(
+			'name' => __( 'Posts Slider', 'vc-materialize-elements' ),
+			'base' => 'vc_materialize_posts_slider',
+			'class' => '',
+			'category' => __( 'Content', 'vc-materialize-elements' ),
+			'show_settings_on_create' => true,
+			'params' => array(
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Posts Category', 'vc-materialize-elements' ),
+                                        'param_name' => 'category',
+                                        'value' => '',
+                                        'description' => __( 'The category of the posts for this slider.', 'vc-materialize-elements' )
+                                ),
+				array(
+					'type' => 'colorpicker',
+					'class' => '',
+					'heading' => __( 'Background Color', 'vc-materialize-elements' ),
+					'param_name' => 'background_color',
+					'value' => '',
+					'description' => __( 'The background color of the slider', 'vc-materialize-elements' )
+				),
+				array(
+					'type' => 'colorpicker',
+					'class' => '',
+					'heading' => __( 'Text Color', 'vc-materialize-elements' ),
+					'param_name' => 'text_color',
+					'value' => '',
+					'description' => __( 'The text color of the post content.', 'vc-materialize-elements' )
+				),
+				array(
+                                        'type' => 'textfield',
+                                        'holder' => 'div',
+                                        'class' => '',
+                                        'heading' => __( 'Class', 'vc-materialize-elements' ),
+                                        'param_name' => 'class',
+                                        'value' => '',
+                                        'description' => __( 'Enter additional CSS classes for the slider.', 'vc-materialize-elements' )
+                                )
+			)
+		) );
 	}
 	add_action( 'vc_before_init', 'vc_materialize_elements_map' );
 	
@@ -415,4 +466,33 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                 return vc_materialize_elements_get_template_contents( 'image', $args );
         }
         add_shortcode( 'vc_materialize_image', 'vc_materialize_elements_shortcode_image' );
+
+	function vc_materialize_elements_shortcode_posts_slider( $atts, $content ) {
+                $args = shortcode_atts( array(
+                        'category' => '',
+			'background_color' => '',
+			'text_color' => '',
+                        'class' => ''
+                ), $atts );
+                $args['content'] = $content;
+		$args['posts'] = get_posts( array(
+			'posts_per_page'   => 10,
+			'offset'           => 0,
+			'category'         => $args['category'],
+			'category_name'    => '',
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			//'include'          => '',
+			//'exclude'          => '',
+			//'meta_key'         => '',
+			//'meta_value'       => '',
+			'post_type'        => 'post',
+			//'post_mime_type'   => '',
+			//'post_parent'      => '',
+			'post_status'      => 'publish',
+			//'suppress_filters' => true 
+		) );
+                return vc_materialize_elements_get_template_contents( 'posts_slider', $args );
+        }
+        add_shortcode( 'vc_materialize_posts_slider', 'vc_materialize_elements_shortcode_posts_slider' );
 }
