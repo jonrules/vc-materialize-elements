@@ -492,7 +492,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 			'post_status'      => 'publish',
 			//'suppress_filters' => true 
 		) );
-                return vc_materialize_elements_get_template_contents( 'posts_slider', $args );
+                return vc_materialize_elements_get_template_contents( 'posts-slider', $args );
         }
         add_shortcode( 'vc_materialize_posts_slider', 'vc_materialize_elements_shortcode_posts_slider' );
 }
