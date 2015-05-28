@@ -38,6 +38,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 
 	function vc_materialize_elements_scripts() {
 		wp_enqueue_style( 'unslider', plugins_url( '/css/unslider.css', __FILE__  ) );
+		wp_enqueue_script( 'jquery-event-swipe', plugins_url( '/js/jquery.event.swipe.js', __FILE__  ), array( 'jquery' ) );
 		wp_enqueue_script( 'unslider', plugins_url( '/js/unslider.min.js', __FILE__  ), array( 'jquery' ) );
 		wp_enqueue_script( 'unslider-init', plugins_url( '/js/unslider-init.js', __FILE__  ), array( 'unslider' ) );
 	}
@@ -348,7 +349,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 
 		// Posts Slider
 		vc_map( array(
-			'name' => __( 'Posts Slider', 'vc-materialize-elements' ),
+			'name' => __( 'Posts Unslider', 'vc-materialize-elements' ),
 			'base' => 'vc_materialize_posts_slider',
 			'class' => '',
 			'category' => __( 'Content', 'vc-materialize-elements' ),
@@ -359,7 +360,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
                                         'holder' => 'div',
                                         'class' => '',
                                         'heading' => __( 'Posts Category', 'vc-materialize-elements' ),
-                                        'param_name' => 'category',
+                                        'param_name' => 'posts_category',
                                         'value' => '',
                                         'description' => __( 'The category of the posts for this slider.', 'vc-materialize-elements' )
                                 ),
@@ -368,7 +369,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 					'class' => '',
 					'heading' => __( 'Background Color', 'vc-materialize-elements' ),
 					'param_name' => 'background_color',
-					'value' => '',
+					'value' => '#ff5722',
 					'description' => __( 'The background color of the slider', 'vc-materialize-elements' )
 				),
 				array(
@@ -376,7 +377,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 					'class' => '',
 					'heading' => __( 'Text Color', 'vc-materialize-elements' ),
 					'param_name' => 'text_color',
-					'value' => '',
+					'value' => '#ffffff',
 					'description' => __( 'The text color of the post content.', 'vc-materialize-elements' )
 				),
 				array(
@@ -470,7 +471,7 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 
 	function vc_materialize_elements_shortcode_posts_slider( $atts, $content ) {
                 $args = shortcode_atts( array(
-                        'category' => '',
+                        'posts_category' => '',
 			'background_color' => '',
 			'text_color' => '',
                         'class' => ''
@@ -479,8 +480,8 @@ if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
 		$args['posts'] = get_posts( array(
 			'posts_per_page'   => 10,
 			'offset'           => 0,
-			'category'         => $args['category'],
-			'category_name'    => '',
+			//'category'         => $args['posts_category'],
+			'category_name'    => $args['posts_category'],
 			'orderby'          => 'date',
 			'order'            => 'DESC',
 			//'include'          => '',
