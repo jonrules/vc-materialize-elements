@@ -9,7 +9,9 @@
 	<?php elseif ( $video_url ): ?>
 		<?php $video_url_parts = parse_url( $video_url ); ?>
 		<?php $video_url_query_params = array(); ?>
-		<?php parse_str( $video_url_parts['query'], $video_url_query_params ); ?>
+		<?php if ( ! empty( $video_url_parts['query'] ) ): ?>
+			<?php parse_str( $video_url_parts['query'], $video_url_query_params ); ?>
+		<?php endif; ?>
 		<div class="card-image waves-effect waves-block waves-light">
 			<?php if ( strpos( $video_url_parts['host'], 'vimeo' ) !== false ): ?>
 				<iframe src="https://player.vimeo.com/video<?php echo esc_html( $video_url_parts['path'] ); ?>" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
